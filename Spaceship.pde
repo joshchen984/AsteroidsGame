@@ -13,6 +13,12 @@ class Spaceship extends Floater
       
       createCorners();
     }
+    public double getX(){
+      return myCenterX;
+    }
+    public double getY(){
+      return myCenterY;
+    }
     public void move(){
       super.move();
       float decay = 0.05;

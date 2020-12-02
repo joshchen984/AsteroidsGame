@@ -4,13 +4,22 @@ boolean isLeft, isRight, isAccel;
 int turnDeg;
 int framerate;
 int hyperCooldown;
+ArrayList<Asteroid> asteroids;
+ArrayList<Integer> indexes;
 public void setup() 
 {
   size(500,500);
   background(0);
-  
+  int col = color(100);
+  asteroids= new ArrayList<Asteroid>();
+  indexes = new ArrayList<Integer>();
+  //add asteroids
+  for(int i = 0; i < 10; i++){
+    asteroids.add(new Asteroid(col));
+  }
+
   //initializing ship variables
-  int col = color(100,255,105);
+  col = color(100,255,105);
   isLeft = false;
   isRight = false;
   isAccel = false;
@@ -27,13 +36,33 @@ public void setup()
 }
 public void draw() 
 {
+  Asteroid a;
+  
   background(0);
   for(Star s:stars){
     s.show();
   }
   ship.move();
   ship.show(isAccel);
-  
+  //moving asteroids
+  for(int i = 0; i < asteroids.size(); i++){
+    a = asteroids.get(i);
+    a.move();
+    a.show();
+    if (a.isOutofScreen()){
+      indexes.add(i);
+    }else if (a.isCollide(ship)){
+      indexes.add(i);
+    }
+  }
+  for(int i: indexes){
+    asteroids.remove(i);
+    int col = color(100);
+    asteroids.add(new Asteroid(col));
+  }
+  indexes.clear();
+
+  //moving ship
   if (isLeft){
     ship.turn(-turnDeg);
   }else if (isRight){
