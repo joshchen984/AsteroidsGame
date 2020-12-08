@@ -53,8 +53,7 @@ public void drawScore(){
   fill(255);
   textAlign(LEFT);
   textSize(25);
-  String strScore = Integer.toString(score);
-  text(strScore, 0, 25);
+  text(score, 0, 25);
 }
 public void draw() 
 {
