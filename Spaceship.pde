@@ -19,6 +19,9 @@ class Spaceship extends Floater
     public double getY(){
       return myCenterY;
     }
+    public double getDirection(){
+      return myPointDirection;
+    }
     public void move(){
       super.move();
       float decay = 0.05;
